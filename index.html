@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบตอบโต้หนังสือราชการอัตโนมัติ - กก.1 บก.ปพ. (0026.(13)1/)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #f1f5f9;
+        }
+        
+        /* สไตล์จำลองกระดาษ A4 ตามระเบียบงานสารบรรณ (ซ้าย 3 ซม., ขวา 2 ซม., บน 2.5 ซม., ล่าง 2 ซม.) */
+        .a4-paper {
+            font-family: 'Sarabun', 'TH SarabunPSK', sans-serif;
+            width: 210mm;
+            min-height: 297mm;
+            padding-top: 25mm;
+            padding-bottom: 20mm;
+            padding-left: 30mm;
+            padding-right: 20mm;
+            background: white;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.15);
+            margin: 0 auto;
+            color: #000000;
+            font-size: 16pt;
+            line-height: 1.35;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .a4-paper p {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ย่อหน้า 2.5 ซม. ตามมาตรฐานสารบรรณ */
+        .indent-sarabun {
+            text-indent: 2.5cm;
+            text-align: justify;
+        }
+
+        .garuda-internal {
+            width: 1.5cm;
+            height: 1.5cm;
+            object-fit: contain;
+        }
+
+        .garuda-external {
+            width: 3cm;
+            height: 3cm;
+            object-fit: contain;
+        }
+
+        .show-guides .a4-paper {
+            background-image: 
+                linear-gradient(to right, rgba(59, 130, 246, 0.25) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(59, 130, 246, 0.25) 1px, transparent 1px);
+            background-size: 10mm 10mm;
+        }
+
+        .show-guides .margin-guide-box {
+            outline: 1px dashed rgba(239, 68, 68, 0.5);
+            position: relative;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #print-area, #print-area * {
+                visibility: visible;
+            }
+            #print-area {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 210mm;
+                min-height: 297mm;
+                margin: 0;
+                box-shadow: none !important;
+                background-image: none !important;
+            }
+            .margin-guide-box {
+                outline: none !important;
+            }
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            input[type="text"], textarea, select {
+                font-size: 16px !important;
+            }
+        }
+
+        #a4-scale-wrapper {
+            transform-origin: top center;
+            transition: transform 0.2s ease;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col text-slate-800 pb-20 xl:pb-6">
+
+    <header class="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 text-white shadow-lg border-b-4 border-amber-500 sticky top-0 z-30">
+        <div class="max-w-[1600px] mx-auto px-3 sm:px-4 py-2.5 sm:py-3 flex flex-wrap items-center justify-between gap-2 sm:gap-4">
+            <div class="flex items-center space-x-2.5 sm:space-x-3">
+                <div class="bg-amber-500/20 border border-amber-400/50 p-2 sm:p-2.5 rounded-xl flex items-center justify-center shadow-inner shrink-0">
+                    <i data-lucide="shield-check" class="w-6 h-6 sm:w-7 sm:h-7 text-amber-400"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <h1 class="text-sm sm:text-lg md:text-xl font-bold tracking-tight text-white leading-tight">ระบบตอบโต้หนังสือราชการอัตโนมัติ</h1>
+                        <span class="inline-block bg-amber-500 text-slate-950 text-[11px] sm:text-xs font-bold px-2 py-0.5 rounded-full">กก.1 บก.ปพ.</span>
+                    </div>
+                    <p class="text-[11px] sm:text-xs text-slate-300">พ.ต.อ.ศตวรรษ บุญมี ผกก.1 บก.ปพ. • <span class="text-amber-300 font-semibold">ที่ 0026.(13)1/</span></p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2 w-full sm:w-auto justify-end border-t border-slate-800 sm:border-none pt-2 sm:pt-0">
+                <button onclick="loadSampleScenario('strategy')" class="flex-1 sm:flex-initial justify-center text-[11px] sm:text-xs bg-amber-500 hover:bg-amber-400 active:scale-95 text-slate-950 font-bold px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg flex items-center gap-1.5 transition shadow-sm">
+                    <i data-lucide="file-clock" class="w-3.5 h-3.5 shrink-0"></i> <span class="truncate">ตัวอย่าง: งานยุทธศาสตร์ (รอหนังสือจริง)</span>
+                </button>
+                <button onclick="loadSampleScenario('request')" class="flex-1 sm:flex-initial justify-center text-[11px] sm:text-xs bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-200 border border-slate-600 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg flex items-center gap-1.5 transition">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-400 shrink-0"></i> <span class="truncate">ตัวอย่าง: หนังสือภายนอก</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="xl:hidden bg-white border-b border-slate-200 sticky top-[88px] sm:top-[68px] z-20 px-3 py-2 shadow-sm">
+        <div class="grid grid-cols-2 gap-2 bg-slate-100 p-1 rounded-xl">
+            <button type="button" id="mobile-tab-form" onclick="switchMobilePanel('form')" class="py-2 px-3 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 bg-blue-900 text-white shadow-sm transition">
+                <i data-lucide="edit-3" class="w-4 h-4"></i>
+                <span>1. ข้อมูล & สั่งการ AI</span>
+            </button>
+            <button type="button" id="mobile-tab-preview" onclick="switchMobilePanel('preview')" class="py-2 px-3 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 text-slate-600 hover:text-slate-900 transition">
+                <i data-lucide="eye" class="w-4 h-4"></i>
+                <span>2. ดูหนังสือ A4 / ส่งออก</span>
+            </button>
+        </div>
+    </div>
+
+    <main class="flex-1 max-w-[1600px] w-full mx-auto px-3 sm:px-4 py-4 sm:py-6 grid grid-cols-1 xl:grid-cols-12 gap-6">
+        
+        <!-- LEFT PANEL: INPUT & AI EDITOR -->
+        <div id="panel-form" class="xl:col-span-5 space-y-4 sm:space-y-5">
+            
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-5">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-full bg-blue-900 text-white text-xs font-bold flex items-center justify-center shrink-0">1</span>
+                        <h2 class="font-semibold text-sm sm:text-base text-slate-800">แหล่งข้อมูลต้นเรื่อง</h2>
+                    </div>
+                    <div class="flex bg-slate-100 p-1 rounded-lg">
+                        <button type="button" id="input-mode-file" onclick="switchInputMode('file')" class="px-2.5 py-1 text-xs font-bold rounded-md bg-white text-blue-900 shadow-sm transition">อัปโหลดไฟล์/รูป</button>
+                        <button type="button" id="input-mode-text" onclick="switchInputMode('text')" class="px-2.5 py-1 text-xs font-semibold rounded-md text-slate-600 transition">พิมพ์/วางข้อความ</button>
+                    </div>
+                </div>
+
+                <!-- Mode 1: File / OCR -->
+                <div id="input-container-file" class="space-y-3">
+                    <div class="grid grid-cols-2 gap-2.5">
+                        <label class="cursor-pointer bg-blue-50 hover:bg-blue-100 active:scale-95 border border-blue-200 text-blue-900 rounded-xl py-2.5 px-3 flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold transition">
+                            <i data-lucide="camera" class="w-4 h-4 text-blue-700 shrink-0"></i>
+                            <span>ถ่ายรูปหนังสือ</span>
+                            <input type="file" accept="image/*" capture="environment" class="hidden" onchange="handleFileUpload(event)">
+                        </label>
+                        <label class="cursor-pointer bg-slate-100 hover:bg-slate-200 active:scale-95 border border-slate-200 text-slate-700 rounded-xl py-2.5 px-3 flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold transition">
+                            <i data-lucide="folder-open" class="w-4 h-4 text-slate-600 shrink-0"></i>
+                            <span>เลือกไฟล์/PDF</span>
+                            <input type="file" accept="image/*,application/pdf,.txt" class="hidden" onchange="handleFileUpload(event)">
+                        </label>
+                    </div>
+
+                    <div id="dropzone" class="border-2 border-dashed border-slate-300 hover:border-blue-600 bg-slate-50/70 hover:bg-blue-50/40 rounded-xl p-4 text-center transition cursor-pointer relative">
+                        <input type="file" id="file-upload" accept="image/*,application/pdf,.txt" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="handleFileUpload(event)">
+                        <div id="upload-empty-state" class="space-y-1.5">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-800 mx-auto flex items-center justify-center">
+                                <i data-lucide="upload-cloud" class="w-5 h-5"></i>
+                            </div>
+                            <p class="text-xs sm:text-sm font-medium text-slate-700">แตะที่นี่เพื่อเลือกรูปภาพหนังสือราชการ หรือไฟล์ PDF</p>
+                            <p class="text-[11px] text-slate-500">AI จะอ่านเลขที่ เรื่อง และร่างคำตอบให้โดยอัตโนมัติ</p>
+                        </div>
+
+                        <div id="upload-preview-state" class="hidden flex items-center justify-between bg-white p-3 rounded-lg border border-slate-200 text-left">
+                            <div class="flex items-center gap-3 overflow-hidden">
+                                <img id="preview-thumb" src="" alt="Preview" class="w-14 h-14 object-cover rounded-lg border hidden">
+                                <div id="preview-icon" class="w-12 h-12 rounded-lg bg-red-100 text-red-700 flex items-center justify-center shrink-0 hidden">
+                                    <i data-lucide="file-text" class="w-6 h-6"></i>
+                                </div>
+                                <div class="truncate">
+                                    <p id="uploaded-filename" class="text-sm font-semibold text-slate-800 truncate">document.jpg</p>
+                                    <p id="uploaded-status" class="text-xs text-emerald-600 font-medium">พร้อมวิเคราะห์ด้วยระบบ AI สารบรรณ</p>
+                                </div>
+                            </div>
+                            <button type="button" onclick="clearUploadedFile(event)" class="text-slate-400 hover:text-red-600 p-1.5 rounded-lg z-10">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mode 2: Text / Pending Real Book -->
+                <div id="input-container-text" class="hidden space-y-2.5">
+                    <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900 flex items-start gap-2">
+                        <i data-lucide="info" class="w-4 h-4 text-amber-700 shrink-0 mt-0.5"></i>
+                        <div>
+                            <span class="font-bold">โหมดรอหนังสือตัวจริง:</span> วางข้อความสรุปคำสั่ง/วิทยุ หรือรายละเอียดจากหน่วยงานต้นสังกัดที่แจ้งมาล่วงหน้า (แม้ยังไม่ได้รับตัวเล่มหนังสือจริง) เพื่อให้ AI ร่างหนังสือตอบกลับได้ทันที
+                        </div>
+                    </div>
+                    <textarea id="source-raw-text" rows="5" placeholder="ตัวอย่าง:&#10;งานยุทธศาสตร์ ฯ ขออ้างอิง หนังสือ บก.ปพ. ที่ 0026.(13)03/4716 ลง 20 ต.ค.69 เรื่อง กำชับการปฏิบัติตนฯ ขอให้ กก. ในสังกัด ส่งรายชื่อข้าราชการตำรวจที่ปฏิบัติหน้าที่สืบสวนหาข่าว ภายใน 21 ต.ค.69 (หนังสืออยู่ระหว่าง ผบก. ลงนาม)" class="w-full rounded-xl border border-slate-300 p-3 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none"></textarea>
+                </div>
+
+                <div class="mt-4 space-y-3 pt-3 border-t border-slate-100">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1.5">แนวทางการตอบโต้หนังสือ / คำสั่งเพิ่มเติมให้ AI</label>
+                        <div class="flex flex-wrap gap-1.5 mb-2">
+                            <button type="button" onclick="setQuickDirective('ส่งรายชื่อข้าราชการตำรวจผู้ปฏิบัติหน้าที่สืบสวนหาข่าวตามที่สั่งการเรียบร้อยแล้ว')" class="xs:text-xs text-[11px] bg-slate-100 hover:bg-blue-100 hover:text-blue-900 text-slate-700 px-2.5 py-1 rounded-md transition">✓ ส่งรายชื่อตามสั่งการ</button>
+                            <button type="button" onclick="setQuickDirective('ตอบรับทราบและดำเนินการตามสั่งการเรียบร้อยแล้ว')" class="xs:text-xs text-[11px] bg-slate-100 hover:bg-blue-100 hover:text-blue-900 text-slate-700 px-2.5 py-1 rounded-md transition">✓ ตอบรับทราบและดำเนินการแล้ว</button>
+                            <button type="button" onclick="setQuickDirective('ขอส่งรายงานผลการปฏิบัติราชการประจำเดือนตามที่สั่งการ')" class="xs:text-xs text-[11px] bg-slate-100 hover:bg-blue-100 hover:text-blue-900 text-slate-700 px-2.5 py-1 rounded-md transition">✓ ส่งรายงานผลปฏิบัติ</button>
+                        </div>
+                        <textarea id="ai-directive" rows="2" placeholder="เช่น ให้ตอบกลับเป็นบันทึกข้อความ เรียน ผบก.ปพ. (ผ่าน ฝอ.บก.ปพ.) ว่า กก.1 บก.ปพ. ได้จัดส่งรายชื่อเรียบร้อยแล้ว..." class="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none"></textarea>
+                    </div>
+
+                    <button id="btn-analyze" onclick="analyzeAndDraftWithAI()" class="w-full bg-gradient-to-r from-blue-900 to-indigo-900 hover:from-blue-800 hover:to-indigo-800 active:scale-[0.99] text-white font-semibold py-3 px-4 rounded-xl shadow-md hover:shadow-lg flex items-center justify-center gap-2 transition">
+                        <i data-lucide="wand-2" class="w-4 h-4 text-amber-400"></i>
+                        <span>วิเคราะห์ & ร่างหนังสือราชการอัตโนมัติ</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-5 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 gap-2">
+                    <div class="flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-full bg-blue-900 text-white text-xs font-bold flex items-center justify-center shrink-0">2</span>
+                        <h2 class="font-semibold text-sm sm:text-base text-slate-800">รายละเอียดหนังสือราชการ</h2>
+                    </div>
+
+                    <label class="inline-flex items-center cursor-pointer gap-1.5 text-xs font-medium text-slate-700 bg-slate-100 px-2.5 py-1.5 rounded-lg shrink-0">
+                        <input type="checkbox" id="use-thai-digits" onchange="renderPaper()" class="rounded text-blue-900 focus:ring-blue-900 w-4 h-4">
+                        <span>เลขไทย (๑,๒)</span>
+                    </label>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 sm:gap-3 bg-slate-100 p-1.5 rounded-xl">
+                    <button type="button" id="tab-internal" onclick="setDocType('internal')" class="py-2.5 px-2 sm:px-3 rounded-lg text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 bg-blue-900 text-white shadow-sm transition">
+                        <i data-lucide="file-text" class="w-4 h-4 shrink-0"></i>
+                        <span class="truncate">บันทึกข้อความ (ภายใน)</span>
+                    </button>
+                    <button type="button" id="tab-external" onclick="setDocType('external')" class="py-2.5 px-2 sm:px-3 rounded-lg text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 text-slate-600 hover:text-slate-900 transition">
+                        <i data-lucide="mail" class="w-4 h-4 shrink-0"></i>
+                        <span class="truncate">หนังสือภายนอก</span>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                    <div id="field-dept-wrapper" class="sm:col-span-2">
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">ส่วนราชการ (เจ้าของหนังสือ)</label>
+                        <input type="text" id="doc-dept" value="กก.1 บก.ปพ. โทร. 0 2512 0026" oninput="renderPaper()" class="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm">
+                    </div>
+
+                    <div id="field-address-wrapper" class="sm:col-span-2 hidden">
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">ส่วนราชการเจ้าของหนังสือ / ที่ตั้ง (มุมขวาบนหนังสือภายนอก)</label>
+                        <textarea id="doc-address" rows="2" oninput="renderPaper()" class="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm">กองกำกับการ 1 กองบังคับการปฏิบัติการพิเศษ
+ถนนพหลโยธิน ตำบลบ้านใหม่ อำเภอปากเกร็ด จังหวัดนนทบุรี 11120</textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">ที่ (เลขที่หนังสือ กก.1 บก.ปพ.)</label>
+                        <input type="text" id="doc-number" value="0026.(13)1/" oninput="renderPaper()" class="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-blue-950 bg-blue-50/40">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">วันที่ เดือน ปี</label>
+                        <input type="text" id="doc-date" value="20 ตุลาคม 2569" oninput="renderPaper()" class="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm">
+                    </div>
+
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">เรื่อง</label>
+                        <input type="text" id="doc-subject" value="รายงานผลการตรวจสอบและดำเนินการตามสั่งการ" oninput="renderPaper()" class="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm">
+                    </div>
+
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">เรียน</label>
+                        <input type="text" id="doc-to" value="ผบก.ปพ." oninput="renderPaper()" class="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm">
+                    </div>
+
+                    <div id="field-ref-wrapper" class="sm:col-span-2 hidden">
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">อ้างถึง (ถ้าไม่มีให้เว้นว่าง)</label>
+                        <input type="text" id="doc-ref" placeholder="เช่น หนังสือ บก.ปพ. ที่ 0026.(13)03/4716 ลง 20 ต.ค.69" oninput="renderPaper()" class="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm">
+                    </div>
+
+                    <div id="field-enclosure-wrapper" class="sm:col-span-2 hidden">
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">สิ่งที่ส่งมาด้วย (ถ้าไม่มีให้เว้นว่าง)</label>
+                        <input type="text" id="doc-enclosure" placeholder="เช่น บัญชีรายชื่อข้าราชการตำรวจ จำนวน 1 ชุด" oninput="renderPaper()" class="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm">
+                    </div>
+
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-semibold text-blue-900 mb-1">ย่อหน้าที่ 1 : ภาคเหตุ</label>
+                        <textarea id="doc-p1" rows="3" oninput="renderPaper()" class="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm">ตามหนังสือ กองบังคับการปฏิบัติการพิเศษ ที่อ้างถึง ให้ กองกำกับการ 1 กองบังคับการปฏิบัติการพิเศษ ดำเนินการตรวจสอบข้อมูลและจัดเตรียมกำลังพลเพื่อสนับสนุนภารกิจตามแผนปฏิบัติการประจำปีงบประมาณ พ.ศ. 2569 นั้น</textarea>
+                    </div>
+
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-semibold text-blue-900 mb-1">ย่อหน้าที่ 2 : ภาคความประสงค์</label>
+                        <textarea id="doc-p2" rows="3" oninput="renderPaper()" class="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm">กองกำกับการ 1 กองบังคับการปฏิบัติการพิเศษ ได้ดำเนินการตรวจสอบและจัดเตรียมข้าราชการตำรวจในสังกัดพร้อมยุทโธปกรณ์เรียบร้อยแล้ว รายละเอียดปรากฏตามเอกสารที่แนบมาพร้อมนี้</textarea>
+                    </div>
+
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-semibold text-blue-900 mb-1">ย่อหน้าที่ 3 : ภาคสรุป</label>
+                        <textarea id="doc-p3" rows="2" oninput="renderPaper()" class="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm">จึงเรียนมาเพื่อโปรดทราบ</textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">ยศ (หน้าลายเซ็น)</label>
+                        <input type="text" id="doc-rank" value="พ.ต.อ." oninput="renderPaper()" class="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">ชื่อ - นามสกุล ผู้ลงนาม</label>
+                        <input type="text" id="doc-signer-name" value="ศตวรรษ บุญมี" oninput="renderPaper()" class="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm">
+                    </div>
+
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">ตำแหน่งผู้ลงนาม</label>
+                        <input type="text" id="doc-signer-pos" value="ผกก.1 บก.ปพ." oninput="renderPaper()" class="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm">
+                    </div>
+
+                    <div id="field-contact-wrapper" class="sm:col-span-2 hidden grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-100">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">ส่วนราชการเจ้าของเรื่อง (มุมซ้ายล่าง)</label>
+                            <input type="text" id="doc-owner-unit" value="งานสารบรรณ กก.1 บก.ปพ." oninput="renderPaper()" class="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">โทรศัพท์ / โทรสาร</label>
+                            <input type="text" id="doc-owner-tel" value="โทร. 0 2512 0026 โทรสาร 0 2512 0027" oninput="renderPaper()" class="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="panel-preview" class="hidden xl:flex xl:col-span-7 flex-col space-y-4">
+            
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-3 sm:p-4 flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center justify-between w-full sm:w-auto gap-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="flex h-3 w-3 relative shrink-0">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                        </span>
+                        <div>
+                            <h3 class="text-xs sm:text-sm font-bold text-slate-800">ตัวอย่างกระดาษ A4 มาตรฐานสารบรรณ</h3>
+                            <p class="text-[11px] text-slate-500">แตะที่ข้อความบนกระดาษเพื่อแก้ไขโดยตรงได้</p>
+                        </div>
+                    </div>
+
+                    <button type="button" id="btn-zoom-mode" onclick="toggleMobileZoom()" class="xl:hidden px-2.5 py-1.5 rounded-lg bg-slate-100 border border-slate-300 text-xs font-semibold text-slate-700 flex items-center gap-1 shrink-0">
+                        <i data-lucide="maximize-2" class="w-3.5 h-3.5 text-blue-800"></i>
+                        <span id="zoom-mode-label">ซูม 100%</span>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-2 sm:flex items-center flex-wrap gap-2 w-full sm:w-auto">
+                    <button type="button" onclick="toggleMarginGuides()" id="btn-guides" class="px-3 py-2 rounded-xl border border-slate-300 hover:bg-slate-100 text-xs font-semibold text-slate-700 flex items-center justify-center gap-1.5 transition">
+                        <i data-lucide="ruler" class="w-4 h-4 text-blue-700 shrink-0"></i>
+                        <span class="truncate">เส้นระยะขอบ</span>
+                    </button>
+
+                    <button type="button" onclick="exportToWord()" class="px-3.5 py-2 rounded-xl bg-blue-700 hover:bg-blue-800 active:scale-95 text-white text-xs font-semibold shadow-sm flex items-center justify-center gap-1.5 transition">
+                        <i data-lucide="file-type-2" class="w-4 h-4 shrink-0"></i>
+                        <span class="truncate">ดาวน์โหลด Word</span>
+                    </button>
+
+                    <button type="button" onclick="exportToPDF()" id="btn-pdf" class="px-3.5 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 active:scale-95 text-white text-xs font-semibold shadow-sm flex items-center justify-center gap-1.5 transition">
+                        <i data-lucide="file-down" class="w-4 h-4 shrink-0"></i>
+                        <span class="truncate">ดาวน์โหลด PDF</span>
+                    </button>
+
+                    <button type="button" onclick="window.print()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-900 active:scale-95 text-white text-xs font-semibold shadow-sm flex items-center justify-center gap-1.5 transition">
+                        <i data-lucide="printer" class="w-4 h-4 shrink-0"></i>
+                        <span>พิมพ์</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="status-banner" class="hidden rounded-xl p-3.5 text-xs sm:text-sm font-medium flex items-center justify-between border">
+                <div class="flex items-center gap-2.5">
+                    <i data-lucide="info" class="w-5 h-5 shrink-0"></i>
+                    <span id="status-banner-text">กำลังประมวลผล...</span>
+                </div>
+                <button onclick="hideStatusBanner()" class="text-xs underline ml-4 shrink-0">ปิด</button>
+            </div>
+
+            <div id="paper-container" class="paper-wrapper flex-1 bg-slate-200/80 rounded-2xl p-2 sm:p-6 md:p-8 border border-slate-300/80 overflow-x-auto flex justify-center items-start">
+                <div id="a4-scale-wrapper">
+                    <div id="print-area" class="a4-paper" contenteditable="true" spellcheck="false">
+                        <!-- Dynamic content -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="xl:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 px-3 py-2 z-30 flex items-center justify-between gap-2 shadow-[0_-4px_12px_rgba(0,0,0,0.06)]">
+        <button type="button" id="bottom-btn-toggle" onclick="toggleMobileView()" class="flex-1 bg-slate-900 text-white py-2.5 px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 active:scale-95 transition">
+            <i data-lucide="eye" class="w-4 h-4 text-amber-400"></i>
+            <span id="bottom-btn-toggle-text">ดูตัวอย่างกระดาษ A4</span>
+        </button>
+        <button type="button" onclick="exportToWord()" class="bg-blue-700 text-white py-2.5 px-3.5 rounded-xl text-xs font-semibold flex items-center justify-center gap-1 active:scale-95 transition">
+            <i data-lucide="file-type-2" class="w-4 h-4"></i>
+            <span>Word</span>
+        </button>
+        <button type="button" onclick="exportToPDF()" class="bg-rose-600 text-white py-2.5 px-3.5 rounded-xl text-xs font-semibold flex items-center justify-center gap-1 active:scale-95 transition">
+            <i data-lucide="file-down" class="w-4 h-4"></i>
+            <span>PDF</span>
+        </button>
+    </div>
+
+    <script>
+        let currentDocType = 'internal';
+        let currentInputMode = 'file'; // 'file' or 'text'
+        let uploadedFileBase64 = null;
+        let uploadedFileMimeType = null;
+        let showGuides = false;
+        let activeMobilePanel = 'form';
+        let mobileFitToScreen = true;
+
+        function switchInputMode(mode) {
+            currentInputMode = mode;
+            const btnFile = document.getElementById('input-mode-file');
+            const btnText = document.getElementById('input-mode-text');
+            const contFile = document.getElementById('input-container-file');
+            const contText = document.getElementById('input-container-text');
+
+            if (mode === 'file') {
+                btnFile.className = "px-2.5 py-1 text-xs font-bold rounded-md bg-white text-blue-900 shadow-sm transition";
+                btnText.className = "px-2.5 py-1 text-xs font-semibold rounded-md text-slate-600 transition";
+                contFile.classList.remove('hidden');
+                contText.classList.add('hidden');
+            } else {
+                btnText.className = "px-2.5 py-1 text-xs font-bold rounded-md bg-white text-blue-900 shadow-sm transition";
+                btnFile.className = "px-2.5 py-1 text-xs font-semibold rounded-md text-slate-600 transition";
+                contText.classList.remove('hidden');
+                contFile.classList.add('hidden');
+            }
+        }
+
+        function switchMobilePanel(panel) {
+            activeMobilePanel = panel;
+            const panelForm = document.getElementById('panel-form');
+            const panelPreview = document.getElementById('panel-preview');
+            const tabForm = document.getElementById('mobile-tab-form');
+            const tabPreview = document.getElementById('mobile-tab-preview');
+            const bottomToggleText = document.getElementById('bottom-btn-toggle-text');
+
+            if (panel === 'form') {
+                panelForm.classList.remove('hidden');
+                panelPreview.classList.add('hidden');
+                tabForm.className = "py-2 px-3 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 bg-blue-900 text-white shadow-sm transition";
+                tabPreview.className = "py-2 px-3 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 text-slate-600 hover:text-slate-900 transition";
+                if (bottomToggleText) bottomToggleText.textContent = 'ดูตัวอย่างกระดาษ A4';
+            } else {
+                panelForm.classList.add('hidden');
+                panelPreview.classList.remove('hidden');
+                panelPreview.classList.add('flex');
+                tabPreview.className = "py-2 px-3 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 bg-blue-900 text-white shadow-sm transition";
+                tabForm.className = "py-2 px-3 rounded-lg text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 text-slate-600 hover:text-slate-900 transition";
+                if (bottomToggleText) bottomToggleText.textContent = 'กลับไปแก้ไขข้อมูล';
+                setTimeout(updateMobilePaperScale, 50);
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileView() {
+            switchMobilePanel(activeMobilePanel === 'form' ? 'preview' : 'form');
+        }
+
+        function toggleMobileZoom() {
+            mobileFitToScreen = !mobileFitToScreen;
+            const label = document.getElementById('zoom-mode-label');
+            if (label) {
+                label.textContent = mobileFitToScreen ? 'ซูม 100%' : 'ย่อพอดีจอ';
+            }
+            updateMobilePaperScale();
+        }
+
+        function updateMobilePaperScale() {
+            const wrapper = document.getElementById('a4-scale-wrapper');
+            const container = document.getElementById('paper-container');
+            const printArea = document.getElementById('print-area');
+            if (!wrapper || !container || !printArea) return;
+
+            if (window.innerWidth >= 1280 || !mobileFitToScreen) {
+                wrapper.style.transform = 'scale(1)';
+                wrapper.style.height = 'auto';
+                wrapper.style.width = 'auto';
+                return;
+            }
+
+            const availableWidth = container.clientWidth - 16;
+            const a4WidthPx = 794;
+            if (availableWidth < a4WidthPx && availableWidth > 100) {
+                const scale = availableWidth / a4WidthPx;
+                wrapper.style.transform = `scale(${scale})`;
+                wrapper.style.height = `${printArea.offsetHeight * scale + 20}px`;
+            } else {
+                wrapper.style.transform = 'scale(1)';
+                wrapper.style.height = 'auto';
+            }
+        }
+
+        window.addEventListener('resize', updateMobilePaperScale);
+
+        // ตราครุฑตรงตามลิงก์ที่ผู้ใช้กำหนด (3 ซม. และ 1.5 ซม.)
+        const GARUDA_URL_3CM = "https://i.postimg.cc/wxW1gY5R/krut-3-cm.png";
+        const GARUDA_URL_1_5CM = "https://i.postimg.cc/cCK0d2Zd/krut-1-5-cm.png";
+
+        function formatNumber(str) {
+            if (!str) return '';
+            const useThai = document.getElementById('use-thai-digits').checked;
+            if (!useThai) return str;
+            const thaiDigits = ['๐', '๑', '๒', '๓', '๔', '๕', '๖', '๗', '๘', '๙'];
+            return String(str).replace(/[0-9]/g, (w) => thaiDigits[+w]);
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
+        }
+
+        function setDocType(type) {
+            currentDocType = type;
+            const tabInternal = document.getElementById('tab-internal');
+            const tabExternal = document.getElementById('tab-external');
+            const deptWrapper = document.getElementById('field-dept-wrapper');
+            const addressWrapper = document.getElementById('field-address-wrapper');
+            const refWrapper = document.getElementById('field-ref-wrapper');
+            const enclosureWrapper = document.getElementById('field-enclosure-wrapper');
+            const contactWrapper = document.getElementById('field-contact-wrapper');
+
+            if (type === 'internal') {
+                tabInternal.className = "py-2 px-3 rounded-lg text-sm font-semibold flex items-center justify-center gap-2 bg-blue-900 text-white shadow-sm transition";
+                tabExternal.className = "py-2 px-3 rounded-lg text-sm font-semibold flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900 transition";
+                deptWrapper.classList.remove('hidden');
+                addressWrapper.classList.add('hidden');
+                refWrapper.classList.add('hidden');
+                enclosureWrapper.classList.add('hidden');
+                contactWrapper.classList.add('hidden');
+            } else {
+                tabExternal.className = "py-2 px-3 rounded-lg text-sm font-semibold flex items-center justify-center gap-2 bg-blue-900 text-white shadow-sm transition";
+                tabInternal.className = "py-2 px-3 rounded-lg text-sm font-semibold flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900 transition";
+                deptWrapper.classList.add('hidden');
+                addressWrapper.classList.remove('hidden');
+                refWrapper.classList.remove('hidden');
+                enclosureWrapper.classList.remove('hidden');
+                contactWrapper.classList.remove('hidden');
+            }
+            renderPaper();
+        }
+
+        function toggleMarginGuides() {
+            showGuides = !showGuides;
+            const container = document.getElementById('paper-container');
+            const btn = document.getElementById('btn-guides');
+            if (showGuides) {
+                container.classList.add('show-guides');
+                btn.classList.add('bg-blue-50', 'border-blue-400', 'text-blue-800');
+            } else {
+                container.classList.remove('show-guides');
+                btn.classList.remove('bg-blue-50', 'border-blue-400', 'text-blue-800');
+            }
+            renderPaper();
+        }
+
+        function renderPaper() {
+            const dept = formatNumber(escapeHtml(document.getElementById('doc-dept').value));
+            const address = formatNumber(escapeHtml(document.getElementById('doc-address').value)).replace(/\n/g, '<br>');
+            const docNo = formatNumber(escapeHtml(document.getElementById('doc-number').value));
+            const docDate = formatNumber(escapeHtml(document.getElementById('doc-date').value));
+            const subject = formatNumber(escapeHtml(document.getElementById('doc-subject').value));
+            const to = formatNumber(escapeHtml(document.getElementById('doc-to').value));
+            const ref = formatNumber(escapeHtml(document.getElementById('doc-ref').value.trim()));
+            const enclosure = formatNumber(escapeHtml(document.getElementById('doc-enclosure').value.trim()));
+
+            const p1 = formatNumber(escapeHtml(document.getElementById('doc-p1').value));
+            const p2 = formatNumber(escapeHtml(document.getElementById('doc-p2').value));
+            const p3 = formatNumber(escapeHtml(document.getElementById('doc-p3').value));
+
+            const rank = formatNumber(escapeHtml(document.getElementById('doc-rank').value));
+            const signerName = formatNumber(escapeHtml(document.getElementById('doc-signer-name').value));
+            const signerPos = formatNumber(escapeHtml(document.getElementById('doc-signer-pos').value)).replace(/\n/g, '<br>');
+
+            const ownerUnit = formatNumber(escapeHtml(document.getElementById('doc-owner-unit').value));
+            const ownerTel = formatNumber(escapeHtml(document.getElementById('doc-owner-tel').value));
+
+            const printArea = document.getElementById('print-area');
+
+            if (currentDocType === 'internal') {
+                printArea.innerHTML = `
+                    <div class="margin-guide-box">
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 6pt;">
+                            <tr>
+                                <td style="width: 35%; vertical-align: bottom;">
+                                    <img src="${GARUDA_URL_1_5CM}" class="garuda-internal" alt="ตราครุฑ" crossorigin="anonymous">
+                                </td>
+                                <td style="width: 30%; text-align: center; vertical-align: bottom;">
+                                    <span style="font-size: 26pt; font-weight: bold; letter-spacing: 0.5px;">บันทึกข้อความ</span>
+                                </td>
+                                <td style="width: 35%;"></td>
+                            </tr>
+                        </table>
+
+                        <p style="margin-bottom: 4pt;">
+                            <span style="font-weight: bold; font-size: 18pt;">ส่วนราชการ</span>&nbsp;&nbsp;<span>${dept}</span>
+                        </p>
+
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 4pt;">
+                            <tr>
+                                <td style="width: 52%; vertical-align: baseline;">
+                                    <span style="font-weight: bold; font-size: 18pt;">ที่</span>&nbsp;&nbsp;<span>${docNo}</span>
+                                </td>
+                                <td style="width: 48%; vertical-align: baseline;">
+                                    <span style="font-weight: bold; font-size: 18pt;">วันที่</span>&nbsp;&nbsp;<span>${docDate}</span>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p style="margin-bottom: 8pt;">
+                            <span style="font-weight: bold; font-size: 18pt;">เรื่อง</span>&nbsp;&nbsp;<span>${subject}</span>
+                        </p>
+
+                        <p style="margin-bottom: 10pt;">
+                            <span style="font-weight: bold;">เรียน</span>&nbsp;&nbsp;<span>${to}</span>
+                        </p>
+
+                        ${p1 ? `<p class="indent-sarabun" style="margin-bottom: 6pt;">${p1}</p>` : ''}
+                        ${p2 ? `<p class="indent-sarabun" style="margin-bottom: 6pt;">${p2}</p>` : ''}
+                        ${p3 ? `<p class="indent-sarabun" style="margin-bottom: 24pt;">${p3}</p>` : ''}
+
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 18pt;">
+                            <tr>
+                                <td style="width: 42%;"></td>
+                                <td style="width: 58%; text-align: center; vertical-align: top;">
+                                    <div style="text-align: left; padding-left: 1.2cm; margin-bottom: 24pt;">${rank}</div>
+                                    <div>(${signerName})</div>
+                                    <div>${signerPos}</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                `;
+            } else {
+                printArea.innerHTML = `
+                    <div class="margin-guide-box">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <tr>
+                                <td style="width: 36%; vertical-align: bottom; padding-bottom: 4pt;">
+                                    <span>ที่ ${docNo}</span>
+                                </td>
+                                <td style="width: 28%; text-align: center; vertical-align: top;">
+                                    <img src="${GARUDA_URL_3CM}" class="garuda-external" style="margin: 0 auto;" alt="ตราครุฑ" crossorigin="anonymous">
+                                </td>
+                                <td style="width: 36%; vertical-align: bottom; padding-bottom: 4pt; font-size: 14pt; line-height: 1.25;">
+                                    ${address}
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 8pt; margin-bottom: 10pt;">
+                            <tr>
+                                <td style="width: 50%;"></td>
+                                <td style="width: 50%; text-align: left;">
+                                    ${docDate}
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p style="margin-bottom: 6pt;">
+                            <span>เรื่อง</span>&nbsp;&nbsp;<span>${subject}</span>
+                        </p>
+                        <p style="margin-bottom: 6pt;">
+                            <span>เรียน</span>&nbsp;&nbsp;<span>${to}</span>
+                        </p>
+                        ${ref ? `<p style="margin-bottom: 6pt;"><span>อ้างถึง</span>&nbsp;&nbsp;<span>${ref}</span></p>` : ''}
+                        ${enclosure ? `<p style="margin-bottom: 8pt;"><span>สิ่งที่ส่งมาด้วย</span>&nbsp;&nbsp;<span>${enclosure}</span></p>` : ''}
+
+                        ${p1 ? `<p class="indent-sarabun" style="margin-top: 6pt; margin-bottom: 6pt;">${p1}</p>` : ''}
+                        ${p2 ? `<p class="indent-sarabun" style="margin-bottom: 6pt;">${p2}</p>` : ''}
+                        ${p3 ? `<p class="indent-sarabun" style="margin-bottom: 14pt;">${p3}</p>` : ''}
+
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 12pt; margin-bottom: 26pt;">
+                            <tr>
+                                <td style="width: 42%;"></td>
+                                <td style="width: 58%; text-align: center;">
+                                    <div style="margin-bottom: 28pt;">ขอแสดงความนับถือ</div>
+                                    <div style="text-align: left; padding-left: 1cm; margin-bottom: 6pt;">${rank}</div>
+                                    <div>(${signerName})</div>
+                                    <div>${signerPos}</div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div style="margin-top: 24pt; font-size: 14pt; line-height: 1.3;">
+                            <p>${ownerUnit}</p>
+                            <p>${ownerTel}</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const emptyState = document.getElementById('upload-empty-state');
+            const previewState = document.getElementById('upload-preview-state');
+            const thumb = document.getElementById('preview-thumb');
+            const icon = document.getElementById('preview-icon');
+            const filenameEl = document.getElementById('uploaded-filename');
+
+            filenameEl.textContent = file.name;
+            uploadedFileMimeType = file.type || 'image/jpeg';
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const result = e.target.result;
+                uploadedFileBase64 = result.split(',')[1];
+
+                emptyState.classList.add('hidden');
+                previewState.classList.remove('hidden');
+
+                if (file.type.startsWith('image/')) {
+                    thumb.src = result;
+                    thumb.classList.remove('hidden');
+                    icon.classList.add('hidden');
+                } else {
+                    thumb.classList.add('hidden');
+                    icon.classList.remove('hidden');
+                }
+                showStatusBanner('อัปโหลดไฟล์ "' + file.name + '" สำเร็จ กดปุ่มวิเคราะห์ได้เลย', 'info');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function clearUploadedFile(event) {
+            event.stopPropagation();
+            uploadedFileBase64 = null;
+            uploadedFileMimeType = null;
+            document.getElementById('file-upload').value = '';
+            document.getElementById('upload-empty-state').classList.remove('hidden');
+            document.getElementById('upload-preview-state').classList.add('hidden');
+        }
+
+        function setQuickDirective(text) {
+            document.getElementById('ai-directive').value = text;
+        }
+
+        function showStatusBanner(message, type = 'info') {
+            const banner = document.getElementById('status-banner');
+            const textEl = document.getElementById('status-banner-text');
+            banner.classList.remove('hidden', 'bg-blue-50', 'text-blue-800', 'border-blue-200', 'bg-emerald-50', 'text-emerald-800', 'border-emerald-200', 'bg-amber-50', 'text-amber-800', 'border-amber-200');
+            
+            if (type === 'success') {
+                banner.classList.add('bg-emerald-50', 'text-emerald-800', 'border-emerald-200');
+            } else if (type === 'warning') {
+                banner.classList.add('bg-amber-50', 'text-amber-800', 'border-amber-200');
+            } else {
+                banner.classList.add('bg-blue-50', 'text-blue-800', 'border-blue-200');
+            }
+            textEl.textContent = message;
+        }
+
+        function hideStatusBanner() {
+            document.getElementById('status-banner').classList.add('hidden');
+        }
+
+        async function fetchWithRetry(url, options, retries = 3, delay = 1000) {
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (response.ok) return await response.json();
+                } catch (err) {
+                    if (i === retries - 1) throw err;
+                }
+                await new Promise(res => setTimeout(res, delay * Math.pow(2, i)));
+            }
+            throw new Error('ไม่สามารถเชื่อมต่อระบบ AI ได้ในขณะนี้');
+        }
+
+        async function analyzeAndDraftWithAI() {
+            const directive = document.getElementById('ai-directive').value.trim();
+            const rawText = document.getElementById('source-raw-text').value.trim();
+            const btn = document.getElementById('btn-analyze');
+
+            if (currentInputMode === 'file' && !uploadedFileBase64 && !directive) {
+                showStatusBanner('กรุณาอัปโหลดไฟล์รูปภาพ/PDF หรือสลับไปโหมดพิมพ์ข้อความเพื่อระบุรายละเอียดก่อนครับ', 'warning');
+                return;
+            }
+            if (currentInputMode === 'text' && !rawText) {
+                showStatusBanner('กรุณากรอกข้อความรายละเอียดหรือตัวอย่างหนังสือต้นเรื่องที่ได้รับ (กรณีรอหนังสือตัวจริง)', 'warning');
+                return;
+            }
+
+            const originalBtnHTML = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> <span>AI กำลังวิเคราะห์และร่างหนังสือราชการตามระเบียบ...</span>`;
+            lucide.createIcons();
+            showStatusBanner('กำลังประมวลผลด้วย AI สารบรรณ กก.1 บก.ปพ. (ที่ 0026.(13)1/)...', 'info');
+
+            const systemPrompt = `คุณคือผู้เชี่ยวชาญด้านงานสารบรรณ ประจำกองกำกับการ 1 กองบังคับการปฏิบัติการพิเศษ (กก.1 บก.ปพ.) ซึ่งมีเลขที่หนังสือประจำหน่วยคือ "0026.(13)1/" (ห้ามใส่คำว่า ตช นำหน้าเด็ดขาด ให้ขึ้นต้นด้วย 0026.(13)1/ ตามด้วยเลขรันหรือเว้นว่างไว้)
+ผู้ลงนามคือ พ.ต.อ.ศตวรรษ บุญมี ตำแหน่ง ผกก.1 บก.ปพ.
+หน้าที่ของคุณคืออ่านข้อมูลต้นเรื่อง (ไม่ว่าจะเป็นจากไฟล์รูปภาพ หรือจากข้อความที่ผู้ใช้กรอกเข้ามา เช่น กรณีรอหนังสือตัวจริง) แล้วร่างหนังสือราชการตอบกลับให้ถูกต้องตามระเบียบสำนักนายกรัฐมนตรีว่าด้วยงานสารบรรณ
+- หากเป็นการติดต่อภายในหน่วยงาน ให้ใช้ docType เป็น "internal" (บันทึกข้อความ)
+- หากเป็นการติดต่อหน่วยงานภายนอก ให้ใช้ docType เป็น "external" (หนังสือภายนอก)
+- หากมีข้อมูล "อ้างถึง" จากต้นเรื่อง ให้ใส่ในฟิลด์ reference
+- แบ่งเนื้อหาออกเป็น 3 ย่อหน้าชัดเจน ได้แก่:
+  1. p1 (ภาคเหตุ): อ้างอิงหนังสือที่ได้รับหรือข้อความที่แจ้งมา
+  2. p2 (ภาคความประสงค์): รายละเอียดการดำเนินการของ กก.1 บก.ปพ.
+  3. p3 (ภาคสรุป): เช่น "จึงเรียนมาเพื่อโปรดทราบ" หรือ "จึงเรียนมาเพื่อโปรดพิจารณา"`;
+
+            const userPrompt = `กรุณาวิเคราะห์ข้อมูลต้นเรื่องนี้และร่างหนังสือตอบกลับในนาม กองกำกับการ 1 กองบังคับการปฏิบัติการพิเศษ (กก.1 บก.ปพ.) โดยใช้เลขที่หนังสือ "0026.(13)1/"
+${currentInputMode === 'text' ? `ข้อมูลต้นเรื่อง (กรณีรอหนังสือตัวจริง): "${rawText}"` : 'กรุณาอ่านข้อมูลจากรูปภาพที่แนบ'}
+คำสั่ง/แนวทางการตอบกลับเพิ่มเติมจากผู้ใช้: "${directive || 'ให้ตอบรับและดำเนินการตามระเบียบงานสารบรรณอย่างเหมาะสม'}"`;
+
+            const parts = [{ text: userPrompt }];
+            if (currentInputMode === 'file' && uploadedFileBase64) {
+                parts.push({
+                    inlineData: {
+                        mimeType: uploadedFileMimeType,
+                        data: uploadedFileBase64
+                    }
+                });
+            }
+
+            const payload = {
+                contents: [{ role: "user", parts: parts }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: {
+                        type: "OBJECT",
+                        properties: {
+                            docType: { type: "STRING", description: "internal หรือ external" },
+                            docNumber: { type: "STRING", description: "เลขที่หนังสือของ กก.1 บก.ปพ. ต้องขึ้นต้นด้วย 0026.(13)1/ เท่านั้น" },
+                            subject: { type: "STRING", description: "ชื่อเรื่องหนังสือตอบกลับ" },
+                            recipient: { type: "STRING", description: "เรียน (ตำแหน่งผู้รับหนังสือ)" },
+                            reference: { type: "STRING", description: "อ้างถึง" },
+                            enclosure: { type: "STRING", description: "สิ่งที่ส่งมาด้วย" },
+                            p1: { type: "STRING", description: "ภาคเหตุ (ย่อหน้าที่ 1)" },
+                            p2: { type: "STRING", description: "ภาคความประสงค์ (ย่อหน้าที่ 2)" },
+                            p3: { type: "STRING", description: "ภาคสรุป (ย่อหน้าที่ 3)" }
+                        },
+                        required: ["docType", "subject", "recipient", "p1", "p2", "p3"]
+                    }
+                }
+            };
+
+            const apiKey = ""; // ใส่ Gemini API Key ของหน่วยงานที่นี่
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+            try {
+                const result = await fetchWithRetry(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const rawJson = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (rawJson) {
+                    const data = JSON.parse(rawJson);
+                    setDocType(data.docType === 'external' ? 'external' : 'internal');
+                    if (data.docNumber) {
+                        const cleanNum = data.docNumber.replace(/^ตช\.?\s*/i, '').replace(/^0026\(13\)1/, '0026.(13)1');
+                        document.getElementById('doc-number').value = cleanNum;
+                    }
+                    if (data.subject) document.getElementById('doc-subject').value = data.subject;
+                    if (data.recipient) document.getElementById('doc-to').value = data.recipient;
+                    if (data.reference !== undefined) document.getElementById('doc-ref').value = data.reference;
+                    if (data.enclosure !== undefined) document.getElementById('doc-enclosure').value = data.enclosure;
+                    if (data.p1) document.getElementById('doc-p1').value = data.p1;
+                    if (data.p2) document.getElementById('doc-p2').value = data.p2;
+                    if (data.p3) document.getElementById('doc-p3').value = data.p3;
+
+                    renderPaper();
+                    showStatusBanner('ร่างหนังสือราชการอัตโนมัติสำเร็จ! สามารถตรวจสอบและดาวน์โหลดได้ทันที', 'success');
+                    if (window.innerWidth < 1280) {
+                        switchMobilePanel('preview');
+                    }
+                }
+            } catch (error) {
+                console.error(error);
+                showStatusBanner('เกิดข้อผิดพลาดในการเชื่อมต่อ AI ระบบได้จำลองโครงร่างมาตรฐานตามคำสั่งของคุณให้แทนแล้ว', 'warning');
+                if (directive || rawText) {
+                    document.getElementById('doc-p2').value = `กองกำกับการ 1 กองบังคับการปฏิบัติการพิเศษ ได้ดำเนินการพิจารณาตามข้อสั่งการ ${rawText || ''} เรียบร้อยแล้ว ขอเรียนว่า ${directive}`;
+                    renderPaper();
+                }
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalBtnHTML;
+                lucide.createIcons();
+            }
+        }
+
+        function exportToWord() {
+            const content = document.getElementById('print-area').innerHTML;
+            const subject = document.getElementById('doc-subject').value.trim() || 'หนังสือราชการ_กก1_บกปพ';
+
+            const wordHtml = `
+                <html xmlns:o='urn:schemas-microsoft-com:office:office' 
+                      xmlns:w='urn:schemas-microsoft-com:office:word' 
+                      xmlns='http://www.w3.org/TR/REC-html40'>
+                <head>
+                    <meta charset="utf-8">
+                    <title>${subject}</title>
+                    <style>
+                        @page WordSection1 {
+                            size: 21.0cm 29.7cm;
+                            margin: 2.5cm 2.0cm 2.0cm 3.0cm;
+                            mso-header-margin: 1.25cm;
+                            mso-footer-margin: 1.25cm;
+                        }
+                        div.WordSection1 { page: WordSection1; }
+                        body {
+                            font-family: "TH SarabunPSK", "Sarabun", sans-serif;
+                            font-size: 16pt;
+                            line-height: 1.25;
+                            color: #000000;
+                        }
+                        p { margin: 0pt; padding: 0pt; }
+                        .indent-sarabun { text-indent: 2.5cm; text-align: justify; }
+                        table { width: 100%; border-collapse: collapse; }
+                    </style>
+                </head>
+                <body>
+                    <div class="WordSection1">
+                        ${content}
+                    </div>
+                </body>
+                </html>
+            `;
+
+            const blob = new Blob(['\ufeff', wordHtml], {
+                type: 'application/msword;charset=utf-8'
+            });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${subject}_0026(13)1.doc`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+
+            showStatusBanner('ดาวน์โหลดไฟล์ Microsoft Word (.doc) เรียบร้อยแล้ว', 'success');
+        }
+
+        async function exportToPDF() {
+            const element = document.getElementById('print-area');
+            const subject = document.getElementById('doc-subject').value.trim() || 'หนังสือราชการ_กก1_บกปพ';
+            const btnPdf = document.getElementById('btn-pdf');
+            const originalHTML = btnPdf.innerHTML;
+
+            const panelPreview = document.getElementById('panel-preview');
+            const wasHidden = panelPreview.classList.contains('hidden');
+            if (wasHidden) {
+                panelPreview.classList.remove('hidden');
+                panelPreview.classList.add('flex');
+            }
+            const scaleWrapper = document.getElementById('a4-scale-wrapper');
+            const prevTransform = scaleWrapper.style.transform;
+            const prevHeight = scaleWrapper.style.height;
+            scaleWrapper.style.transform = 'scale(1)';
+            scaleWrapper.style.height = 'auto';
+
+            const container = document.getElementById('paper-container');
+            const hadGuides = container.classList.contains('show-guides');
+            if (hadGuides) container.classList.remove('show-guides');
+
+            btnPdf.disabled = true;
+            btnPdf.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> <span>กำลังสร้าง PDF...</span>`;
+            lucide.createIcons();
+
+            const opt = {
+                margin: 0,
+                filename: `${subject}_0026(13)1.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, logging: false },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            try {
+                await html2pdf().set(opt).from(element).save();
+                showStatusBanner('ดาวน์โหลดไฟล์ PDF ขนาดมาตรฐาน A4 เรียบร้อยแล้ว', 'success');
+            } catch (e) {
+                console.error(e);
+                window.print();
+            } finally {
+                scaleWrapper.style.transform = prevTransform;
+                scaleWrapper.style.height = prevHeight;
+                if (wasHidden && activeMobilePanel === 'form') {
+                    panelPreview.classList.add('hidden');
+                    panelPreview.classList.remove('flex');
+                }
+                if (hadGuides) container.classList.add('show-guides');
+                btnPdf.disabled = false;
+                btnPdf.innerHTML = originalHTML;
+                lucide.createIcons();
+            }
+        }
+
+        function loadSampleScenario(type) {
+            if (type === 'strategy') {
+                switchInputMode('text');
+                document.getElementById('source-raw-text').value = 
+`- งานยุทธศาสตร์ ฯ ขอประสานงาน ด่วน 1 เรื่อง ครับ
+- หนังสือ บก.ปพ. ที่ 0026.(13)03/4716 ลง 20 ต.ค.69 เรื่อง กำชับการปฏิบัติตนของข้าราชการตำรวจในสังกัด
+- ขอให้ กก. ในสังกัด ดำเนินการส่งรายชื่อข้าราชการตำรวจในสังกัดที่ปฏิบัติหน้าที่เกี่ยวกับการสืบสวนหาข่าวของ กก. ตามแบบรายงานที่กำหนด
+- ขอให้ส่งมายัง ฝอ.บก.ปพ. (งานยุทธศาสตร์ฯ) ทราบภายในวันที่ 21 ต.ค.69 (ห้ามผัดส่ง)
+- หนังสือ บก. อยู่ระหว่าง ผู้บังคับบัญชาลงนามครับ`;
+
+                setDocType('internal');
+                document.getElementById('doc-number').value = '0026.(13)1/912';
+                document.getElementById('doc-subject').value = 'รายงานส่งรายชื่อข้าราชการตำรวจผู้ปฏิบัติหน้าที่เกี่ยวกับการสืบสวนหาข่าว';
+                document.getElementById('doc-to').value = 'ผบก.ปพ. (ผ่าน ฝอ.บก.ปพ. งานยุทธศาสตร์ฯ)';
+                document.getElementById('doc-ref').value = '';
+                document.getElementById('doc-p1').value = 'ตามที่ ฝอ.บก.ปพ. (งานยุทธศาสตร์ฯ) ได้ประสานแจ้งแนวทางปฏิบัติราชการ กรณีหนังสือ บก.ปพ. ที่ 0026.(13)03/4716 ลง 20 ต.ค.69 เรื่อง กำชับการปฏิบัติตนของข้าราชการตำรวจในสังกัด ให้ กก.1 บก.ปพ. ดำเนินการส่งรายชื่อข้าราชการตำรวจผู้ปฏิบัติหน้าที่เกี่ยวกับการสืบสวนหาข่าว ภายในวันที่ 21 ต.ค.69 นั้น';
+                document.getElementById('doc-p2').value = 'กองกำกับการ 1 กองบังคับการปฏิบัติการพิเศษ ได้ดำเนินการตรวจสอบและรวบรวมรายชื่อข้าราชการตำรวจในสังกัดที่ปฏิบัติหน้าที่ดังกล่าวเรียบร้อยแล้ว รายละเอียดปรากฏตามบัญชีรายชื่อที่แนบมาพร้อมนี้';
+                document.getElementById('doc-p3').value = 'จึงเรียนมาเพื่อโปรดพิจารณาอนุมัติ';
+                showStatusBanner('โหลดตัวอย่าง "งานยุทธศาสตร์ ฯ (รอหนังสือจริง)" เรียบร้อยแล้ว', 'info');
+            } else if (type === 'request') {
+                switchInputMode('file');
+                setDocType('external');
+                document.getElementById('doc-number').value = '0026.(13)1/1045';
+                document.getElementById('doc-subject').value = 'ขอส่งรายชื่อข้าราชการตำรวจเข้าร่วมสนับสนุนภารกิจรักษาความปลอดภัย';
+                document.getElementById('doc-to').value = 'อธิบดีกรมการกงสุล';
+                document.getElementById('doc-ref').value = 'หนังสือกรมการกงสุล ด่วนที่สุด ที่ กต 0402/2819 ลงวันที่ 18 ตุลาคม 2569';
+                document.getElementById('doc-enclosure').value = 'บัญชีรายชื่อข้าราชการตำรวจ กก.1 บก.ปพ. จำนวน 1 ชุด';
+                document.getElementById('doc-p1').value = 'ตามหนังสือที่อ้างถึง กรมการกงสุล ขอความอนุเคราะห์สนับสนุนกำลังพลข้าราชการตำรวจชุดปฏิบัติการพิเศษ เพื่อร่วมปฏิบัติภารกิจรักษาความปลอดภัยคณะผู้แทนทางการทูต ในระหว่างวันที่ 24 - 26 ตุลาคม 2569 นั้น';
+                document.getElementById('doc-p2').value = 'กองกำกับการ 1 กองบังคับการปฏิบัติการพิเศษ ได้พิจารณาจัดกำลังพลข้าราชการตำรวจที่มีความเชี่ยวชาญพร้อมยุทโธปกรณ์เข้าร่วมปฏิบัติภารกิจดังกล่าวเรียบร้อยแล้ว รายละเอียดปรากฏตามสิ่งที่ส่งมาด้วย';
+                document.getElementById('doc-p3').value = 'จึงเรียนมาเพื่อโปรดทราบ';
+                showStatusBanner('โหลดตัวอย่าง "หนังสือภายนอก" เรียบร้อยแล้ว', 'info');
+            }
+            renderPaper();
+        }
+
+        window.onload = function() {
+            lucide.createIcons();
+            renderPaper();
+            updateMobilePaperScale();
+        };
+    </script>
+</body>
+</html>
